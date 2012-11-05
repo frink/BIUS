@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>BIUS Editor</title>
+	<script src="jquery-1.7.2.min.js"></script>
+	<script src="jquery.hotkeys.beta.js"></script>
+	<script src="jquery.bius.js"></script>
+	<script src="jquery.htmlclean.js"></script>
+	<script>
+		$(function() {
+			$('#tester').click(function() {
+				$(this).bius('formatblock,unbius');
+			});
+			$('textarea').unbius(function() { return confirm('Save, Exit and Disable?'); });
+		});
+		function dbg(txt) {
+			$('#status').html(txt);
+		}
+		var i =12;
+	</script>
+	<style>
+		button {
+			z-index: 1000;
+			background: transparent;
+			color: #963;
+			padding: 1px;
+			margin: 1px;
+			border: 1px dotted transparent;
+			font: 11px 'Arial';
+		}
+		button:hover {
+			background: #963 !important;
+			color: #eda;
+			border: 1px solid #eda;
+		}
+		button:hover hr {
+			background: #eda !important;
+			color: #eda !important;
+		}
+		button.bius_select {
+			background: #eda;
+		}
+	</style>
+</head>
+<body>
+	<button onclick="$.bius.load();">autoload</button>
+	<button onclick="$('#bius_frame_text').trigger('focus'); return false;">focus</button>
+	<button onclick="$.bius.unload();">unload all</button>
+	<button onclick="$('textarea').show();">unhide textarea</button>
+	<div id="status">________</div>
+	<hr />
+	<input bius="text" type="text" value="<p>autoload to edit me...</p><blockquote>This is a block quote</blockquote>followed by normal text...</p>" onbius="" />
+	<textarea style="width: 80%; border: 2px dotted #9C6;" stylesheet="style.css" buttons="(File: unbius savebius rebius exitbius) (Format: p | h1 h2 h3 h4 | subscript superscript pre address code) (Edit: cut copy paste | undo redo ) (Insert: createlink inserthorizontalrule) | bold italic underline strikethrough | increasefontsize decreasefontsize justifyleft justifycenter justifyright justifyfull insertunorderedlist insertorderedlist indent outdent | unbius" onunbius="this.edited = true; $(this).hide();" onfocus="if(!this.edited) $(this).bius();">
+<p>Focus me this to begin <b>BIUS Editor</b></p><p>When you close this it will be disabled.</p>
+	</textarea>
+	<div id="tester" buttons="rebius,savebius,exitbius,unbius">
+		<p>click me</p>
+	</div>
+</body>
+</html>
